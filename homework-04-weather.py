@@ -185,10 +185,7 @@ miami_24_url = "http://api.weatherapi.com/v1/forecast.json?key=6e398a633db749468
 miami_24 = requests.get(miami_24_url)
 miami_24 = miami_24.json()
 
-# %%
-hour_counter = 0
-
-for hour in range(24):
+for hour_counter, _ in enumerate(range(24)):
     miami_hour = miami_24['forecast']['forecastday'][0]['hour'][hour_counter]
     if miami_hour['cloud'] > 50:
         print(
@@ -198,25 +195,11 @@ for hour in range(24):
         print(
             f"{miami_hour['time'][-5:]} — {miami_hour['temp_f']}°F."
         )
-    hour_counter += 1
-
-# %%
-
-
-# %% [markdown]
-# ## 8) For the next 24-ish hours in Miami, what percent of the time is the temperature above 85 degrees?
-#
-# - *Tip: You might want to read up on [looping patterns](http://jonathansoma.com/lede/foundations-2017/classes/data%20structures/looping-patterns/)*
-
-# %%
-hour_counter = 0
 hot = []
-for hour in range(24):
+for hour_counter, _ in enumerate(range(24)):
     miami_hour = miami_24['forecast']['forecastday'][0]['hour'][hour_counter]
     if miami_hour['temp_f'] > 80:
         hot.append(hour_counter)
-    hour_counter += 1
-
 # %%
 print(
     f"For the next 24ish hours in miami, it will be above 85 degrees {round(float(len(hot) / 24 * 100))}% of the time."
